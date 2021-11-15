@@ -37,10 +37,10 @@
                                     <a href="{{route("admin.posts.edit", $post["id"])}}">
                                         <button type="button" class="btn btn-warning">Modifica</button>
                                     </a>
-                                <form action="{{route("admin.posts.destroy", $post["id"])}}" method="POST">
+                                <form onsubmit="return confirm('Sei sicuro di voler eliminare?')" action="{{route("admin.posts.destroy", $post["id"])}}" method="POST">
                                     @csrf
                                     @method("DELETE")
-                                    <button type="submit" class="btn btn-danger">Elimina</button>
+                                    <button  type="submit" class="btn btn-danger">Elimina</button>
 
                                 </form>
                             </td>

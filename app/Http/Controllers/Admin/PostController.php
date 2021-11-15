@@ -92,7 +92,6 @@ class PostController extends Controller
         // $post->update();
 
         if($post->title!= $request->title){
-           
     
             $post->slug =$this->getSlug($request->title);
         }
@@ -114,7 +113,7 @@ class PostController extends Controller
         return redirect()->route("admin.posts.index")->with("success", "il Post {$post->title} è stato eliminato ");
     }
 
-    private function getSlug($title){
+    protected function getSlug($title){
 
         $slug =Str::of($title)->slug('-');
  
@@ -125,7 +124,6 @@ class PostController extends Controller
                 $slug = Str::of($title)->slug('-') . "-{$count}";
                 $postExist = Post::where("slug", $slug)->first();
                 $count++;
-                
             }
             return $slug;
         
