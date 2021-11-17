@@ -9,7 +9,23 @@
 
                 <div class="card-body">
                 <h1>{{$category["title"]}}</h1>
+                <p>{{$category["slug"]}}</p>
+
                 <p>{{$category["content"]}}</p>
+
+                <ul>
+                    {{-- @dd($category) --}}
+                    @forelse ($category["posts"] as $post)
+                    <h3>Lista post Associati</h3>
+                    <li>
+                            {{$post["title"]}}
+                    </li>
+                    @empty
+                    <h3>Non ci sono post associati</h3>
+
+                    
+                    @endforelse
+                </ul>
 
 
                 

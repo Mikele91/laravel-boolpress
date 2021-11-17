@@ -4,10 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Category;
 
 class CategoryController extends Controller
 {
+    protected $validationRoules=[
+        'name'=> 'string|required|max:50|unique:categories,name',
+       
+    ]; 
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.categories.create");
+        
     }
 
     /**
@@ -37,7 +43,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validationRoules);
+        $newCategory = new Category();
+        $newCategory->fill($request->all());
+        $newCategory->slug = Str::of($newCategory["name"])->slug('-');
+        $newCategory->save();
+        return redirect()->route("admin.categories.index")->with("success", "la categoria è stata creata ");
+
     }
 
     /**
@@ -47,8 +59,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
-    {
-        return view("admin.categories.show", );
+    {   
+
+        return view("admin.categories.show", compact("category") );
     }
 
     /**
@@ -57,9 +70,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view("admin.categories.edit", compact("category"));
     }
 
     /**
@@ -69,9 +82,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $validation =$this->validationRoules;
+        $validation["name"] = $validation["name"]. ",{$category["id"]}";
+        // $post->update();
+        $request->validate( $validation);
+        if($category->name!= $request->name){
+    
+            $category->slug =Str::of($request->name)->slug('-');
+        }
+        $category->fill($request->all());
+
+        $category->save();
+        return redirect()->route("admin.categories.index")->with("success", "La categoria è stata aggiornata ");
+
     }
 
     /**

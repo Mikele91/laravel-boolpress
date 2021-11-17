@@ -97,7 +97,7 @@ class PostController extends Controller
         $post->fill($request->all());
 
         $post->save();
-        return redirect()->route("admin.posts.show", $post->id);
+        return redirect()->route("admin.posts.show", $post->id)->with("success", "il Post è stato Modificato ");;
     }
 
     /**
