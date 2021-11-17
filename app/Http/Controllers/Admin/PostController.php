@@ -12,8 +12,8 @@ class PostController extends Controller
     protected $validationRoules=[
         'title'=> 'string|required|max:100',
         'content'=> 'string|required',
-
-    ];
+        "category_id"=> 'nullable|exists:categories,id'
+    ]; 
     /**
      * Display a listing of the resource.
      *
@@ -51,12 +51,7 @@ class PostController extends Controller
         $newPost->fill($request->all());
         $newPost->slug =$this->getSlug($request->title);
 
-       
-
         $newPost->save();
-
-
-
         return redirect()->route("admin.posts.index")->with("success", "il Post è stato creato ");
 
     }
@@ -80,7 +75,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view("admin.posts.edit ", compact("post"));
+        $categories = Category::all();
+        return view("admin.posts.edit ", compact("post","categories"));
     }
 
     /**
@@ -94,7 +90,6 @@ class PostController extends Controller
     {
         $request->validate($this->validationRoules);
         // $post->update();
-
         if($post->title!= $request->title){
     
             $post->slug =$this->getSlug($request->title);

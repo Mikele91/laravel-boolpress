@@ -27,9 +27,23 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="category">Categoria</label>
+
+                            {{-- Bisogna usare il nome della colonna nel name della select --}}
+                            <select name="category_id" class="form-control name="" id="" @error('category_id') is-invalid @enderror">
+                                <option value="">--Seleziona una categoria--</option>
+                                @foreach ($categories as $category)
+                                <option {{old("category_id")!= null && old("category_id") == $category["id"] || isset($post["category"]) && $post["category"]["id"] == $category["id"] ? 'selected' : null}}  value="{{$category["id"]}}">{{$category["name"]}}</option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
 
                         
-                        <button type="submit" class="btn btn-primary">Modifica</button>
+                        <button type="submit" class="btn btn-primary">Salva</button>
                     </form>
                 
                 </div>
