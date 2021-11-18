@@ -4,36 +4,20 @@
 <div class="row">
     <div class="col-md-8 blog-main">
 
-            <div class="blog-post">
-                <h1 class="blog-post-title">{{$post["title"]}}</h1>
-                <p class="blog-post-meta">{{$post->created_at->diffForHumans()}} <a href="#">Chris</a></p>
-               @if ($post["tags"])
-               
-               <p>
-                @foreach ($post["tags"] as $tag)
-                        
-                <span class="badge badge-primary">{{$tag["name"]}}</span>
-                @endforeach
-               </p>
-               @endif
-               @if ($post["category"])
-               
-               <h4>
-                Categoria : <a href="{{route("categories.show", $post["category"]["slug"])}}">{{$post["category"]["name"]}}</a>
-               </h4>
-               @endif
-                <p>{{$post["content"]}}</p>
-
-                </div><!-- /.blog-post -->
-
-                <nav class="blog-pagination">
-                    <a class="btn btn-outline-primary" href="#">Older</a>
-                    <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-                </nav>
-
-            </div><!-- /.blog-main -->
-
-    
+        <div class="blog-post">
+            <h1 class="blog-post-title">{{$category["name"]}}</h1>
+            @if (count($category["posts"]) > 0)
+                
+            
+            <h2>Tutti i post associati</h2>
+            <ul>
+            @foreach ($category["post"] as $post)
+            <li><a href="{{route("post.show", $post["slug"])}}">{{$post["title"]}}</a></li>
+                
+            @endforeach
+            </ul>
+            @endif
+        </div>
         <aside class="col-md-4 blog-sidebar">
             <div class="p-3 mb-3 bg-light rounded">
                 <h4 class="font-italic">About</h4>

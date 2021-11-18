@@ -18,4 +18,5 @@ class PostController extends Controller
          }
          return view("guest.posts.show", compact("post"));
     }
+    
 }  

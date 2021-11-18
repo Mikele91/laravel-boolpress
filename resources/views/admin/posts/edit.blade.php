@@ -46,7 +46,12 @@
                             @foreach ($tags as $tag)
                                 
                             <div class="custom-control custom-checkbox">
+                                @if ($errors->any())
+                                <input {{in_array($tag["id"], old("tags", [])) ? "checked" : null}} name="tags[]" value="{{$tag["id"]}}" type="checkbox" class="custom-control-input" id="tag-{{$tag["id"]}}">      
+                                @else
                                 <input {{$post["tags"]->contains($tag["id"]) ? "checked" : null}} name="tags[]" value="{{$tag["id"]}}" type="checkbox" class="custom-control-input" id="tag-{{$tag["id"]}}">
+                                        
+                                @endif
                                 <label class="custom-control-label" for="tag-{{$tag["id"]}}">{{$tag["name"]}}</label>
                               </div>
                               @endforeach
