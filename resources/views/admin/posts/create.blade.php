@@ -49,7 +49,7 @@
                             @foreach ($tags as $tag)
                                 
                             <div class="custom-control custom-checkbox">
-                                <input name="tags[]" type="checkbox" class="custom-control-input" id="tag-{{$tag["id"]}}">
+                                <input name="tags[]" value="{{$tag["id"]}}" type="checkbox" class="custom-control-input" id="tag-{{$tag["id"]}}">
                                 <label class="custom-control-label" for="tag-{{$tag["id"]}}">{{$tag["name"]}}</label>
                               </div>
                               @endforeach

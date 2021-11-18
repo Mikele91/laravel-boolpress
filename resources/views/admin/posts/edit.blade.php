@@ -6,7 +6,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Aggiungi il Post</div>
-
                 <div class="card-body">
             
 
@@ -42,7 +41,16 @@
                         @enderror
                         </div>
 
-                        
+                        <div class="form-group">
+                            <p>Tags</p>
+                            @foreach ($tags as $tag)
+                                
+                            <div class="custom-control custom-checkbox">
+                                <input {{$post["tags"]->contains($tag["id"]) ? "checked" : null}} name="tags[]" value="{{$tag["id"]}}" type="checkbox" class="custom-control-input" id="tag-{{$tag["id"]}}">
+                                <label class="custom-control-label" for="tag-{{$tag["id"]}}">{{$tag["name"]}}</label>
+                              </div>
+                              @endforeach
+                        </div>
                         <button type="submit" class="btn btn-primary">Salva</button>
                     </form>
                 
