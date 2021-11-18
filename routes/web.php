@@ -28,7 +28,7 @@ Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource("posts" ,"PostController");
     Route::resource("categories" ,"CategoryController");
-
+    Route::resource("tags" ,"TagController");
     
 });
 

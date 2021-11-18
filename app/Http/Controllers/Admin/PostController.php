@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
 use App\Category;
+use App\Tag;
 class PostController extends Controller
 {
     protected $validationRoules=[
@@ -33,8 +34,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
         
-        return  view("admin.posts.create" , compact("categories"));
+        return  view("admin.posts.create" , compact("categories", "tags"));
     }
 
     /**
@@ -45,7 +47,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->all();
+        dd( $request->all() );
         $request->validate($this->validationRoules);
         $newPost = new Post();
         $newPost->fill($request->all());

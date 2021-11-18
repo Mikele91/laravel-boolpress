@@ -15,8 +15,8 @@
 
                 <ul>
                     {{-- @dd($category) --}}
-                    @forelse ($category["posts"] as $post)
                     <h3>Lista post Associati</h3>
+                    @forelse ($category["posts"] as $post)
                     <li>
                             {{$post["title"]}}
                     </li>
