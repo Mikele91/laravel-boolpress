@@ -12,6 +12,7 @@ class PostController extends Controller
     }
     public function show($slug){
         //SELECT FOR posts WHERE slug = slug LIMIT-1
+        
          $post = Post::where("slug",$slug)->first();
          if(!$post){
              abort("404");

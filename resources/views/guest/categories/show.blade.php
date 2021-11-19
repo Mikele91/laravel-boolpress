@@ -11,8 +11,8 @@
             
             <h2>Tutti i post associati</h2>
             <ul>
-            @foreach ($category["post"] as $post)
-            <li><a href="{{route("post.show", $post["slug"])}}">{{$post["title"]}}</a></li>
+            @foreach ($category["posts"] as $post)
+            <li><a href="{{route("posts.show", $post["slug"])}}">{{$post["title"]}}</a></li>
                 
             @endforeach
             </ul>
